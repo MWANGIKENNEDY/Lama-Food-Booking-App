@@ -1,7 +1,28 @@
+"use client"
+
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const LoginPage = () => {
+
+
+  const router = useRouter()
+  const {data,status} = useSession();
+
+  console.log("data is ",data);
+  console.log("status is ",status)
+
+  if(status === "loading"){
+    return <p>loading....</p>
+  }
+
+  if(status === "authenticated"){
+    router.push("/")
+  }
+
+
   return (
     <div className="flex items-center justify-center  p-4 md:p-20 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)]  ">
       <div className="h-full w-full md:h-1/2 flex flex-col md:flex-row  md:w-full lg:w-[80%] xl:w-[70%] 2xl:w-[50%]  shadow-xl">
@@ -20,7 +41,7 @@ const LoginPage = () => {
             Log into your account or create a new one using social buttons.
           </p>
 
-          <div className="shadow-md p-3 flex items-center">
+          <button className="shadow-md p-3 flex items-center" onClick={()=>signIn("google")}>
             <div className="relative h-[3vh] w-1/6 ">
               <Image
                 src="/google.png"
@@ -30,9 +51,9 @@ const LoginPage = () => {
               />
             </div>
             <span className="w-5/6 md:text-base">Sign in with Google</span>
-          </div>
+          </button>
 
-          <div className="shadow-md p-3 flex items-center">
+          <button className="shadow-md p-3 flex items-center">
             <div className="relative h-[3vh] w-1/6 ">
               <Image
                 src="/facebook.png"
@@ -42,7 +63,7 @@ const LoginPage = () => {
               />
             </div>
             <span className="w-5/6 md:text-base">Sign in with Facebook</span>
-          </div>
+          </button>
 
           <span className=" text-xs md:text-sm">
             Have a problem? <span className="underline">Contact us</span>
