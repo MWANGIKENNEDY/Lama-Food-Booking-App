@@ -2,9 +2,15 @@ import Link from "next/link";
 import React from "react";
 import MenuSelect from "./Menu";
 import CartIcon from "./CartIcon";
+import { getAuthSession } from "@/utils/auth";
+import UserLinks from "./UserLinks";
 
-const Navbar = () => {
-  const user = false;
+const Navbar = async () => {
+
+
+;
+
+  console.log("the status from server side session is ")
   return (
     <div className="h-12 md:h-24 text-red-500 p-4 lg:px-20 xl:px-40 flex items-center uppercase justify-between border-b-2 border-b-red-500">
       {/* left links for bigger devices */}
@@ -29,8 +35,7 @@ const Navbar = () => {
       <div className=" hidden md:flex gap-4 items-center flex-1 justify-end">
 
         
-        {user ? <Link href="/">Login</Link> : <Link href="/menu">Order</Link>}
-        <Link href="/contact">Contact</Link>
+    <UserLinks/>
         <CartIcon/>
       </div>
     </div>
