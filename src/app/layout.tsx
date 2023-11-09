@@ -6,6 +6,7 @@ import Notifications from '@/components/Notifications'
 import Footer from '@/components/Footer'
 
 import 'primeicons/primeicons.css';
+import AuthProvider from '@/components/AuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +29,10 @@ export default function RootLayout({
       </head>
       
       <body className={inter.className}>
+
+        <AuthProvider>
+
+        
         <Notifications/>
 
         <Navbar/>
@@ -35,6 +40,8 @@ export default function RootLayout({
         {children}
 
         <Footer/>
+
+        </AuthProvider>
         
         </body>
     </html>
