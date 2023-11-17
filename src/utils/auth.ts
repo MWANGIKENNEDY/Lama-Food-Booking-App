@@ -35,21 +35,24 @@ export const authOptions: NextAuthOptions = {
     //make changes to existing user session
     async session({ session, token, user }) {
 
-      console.log('session cb has been invoked',session)
+      
       if (token) {
         session.user.isAdmin = token.isAdmin;
       }
+
+      console.log('session cb has been invoked',session)
       return session;
     },
 //make changes to existing user token
     async jwt({ token }) {
-      console.log('token cb has been invoked',token)
+      
       const userInDb = await prisma.user.findUnique({
         where: {
           email: token.email!,
         },
       });
       token.isAdmin = userInDb?.isAdmin!;
+      console.log('token cb has been invoked',token)
       return token;
     },
   },

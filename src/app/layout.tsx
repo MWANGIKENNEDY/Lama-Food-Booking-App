@@ -7,6 +7,7 @@ import Footer from '@/components/Footer'
 
 import 'primeicons/primeicons.css';
 import AuthProvider from '@/components/AuthProvider'
+import QueryProvider from '@/components/QueryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,8 @@ export default function RootLayout({
 
         <AuthProvider>
 
+          <QueryProvider>
+
         
         <Notifications/>
 
@@ -40,6 +43,8 @@ export default function RootLayout({
         {children}
 
         <Footer/>
+
+        </QueryProvider>
 
         </AuthProvider>
         
