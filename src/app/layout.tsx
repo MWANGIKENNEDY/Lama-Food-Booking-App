@@ -8,6 +8,8 @@ import Footer from '@/components/Footer'
 import 'primeicons/primeicons.css';
 import AuthProvider from '@/components/AuthProvider'
 import QueryProvider from '@/components/QueryProvider'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,9 +46,13 @@ export default function RootLayout({
 
         <Footer/>
 
+        <ToastContainer position='bottom-right' theme='dark' autoClose={3000}/>
+
         </QueryProvider>
 
         </AuthProvider>
+
+
         
         </body>
     </html>
