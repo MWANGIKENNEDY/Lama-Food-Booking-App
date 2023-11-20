@@ -1,23 +1,22 @@
 "use client";
 
+import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 
-type Props = {
-  price: number;
-  id: number;
-  options?: { title: string; additionalPrice: number }[];
-};
 
-const Price = ({ price, options }: Props) => {
+
+const Price = ({product}:{product:ProductType}) => {
   const [selected, setSelected] = useState(0);
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(()=>{
-    setCost(
-      quantity*(options ? price + options[selected].additionalPrice : price)
-    )
-  },[quantity,selected,options,price])
+    if(product.options?.length){
+      setCost(
+        quantity * product.price + product.options[selected].additionalPrice
+      );
+    }
+  },[quantity,selected,product])
 
   return (
     <div className="flex flex-col gap-4 md:gap-12 shadow-lg">
@@ -25,7 +24,7 @@ const Price = ({ price, options }: Props) => {
       {/* options container */}
 
       <div className="flex gap-4">
-        {options?.map((option, index) => (
+        {product.options?.length && product.options?.map((option, index) => (
           <button
           onClick={()=>setSelected(index)}
 
